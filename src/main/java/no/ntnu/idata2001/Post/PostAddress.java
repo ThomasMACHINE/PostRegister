@@ -135,4 +135,17 @@ public class PostAddress {
                 ", category=" + category +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PostAddress that = (PostAddress) o;
+        return category == that.category && Objects.equals(postTown, that.postTown) && Objects.equals(zipCode, that.zipCode) && Objects.equals(municipalityName, that.municipalityName) && Objects.equals(municipalityNumber, that.municipalityNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(postTown, zipCode, municipalityName, municipalityNumber, category);
+    }
 }
