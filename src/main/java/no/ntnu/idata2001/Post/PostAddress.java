@@ -5,18 +5,22 @@ import java.util.Objects;
 public class PostAddress {
     private String postTown;
     private String zipCode;
-    private String streetAddress;
+    private String municipalityName;
+    private String municipalityNumber;
+    private char category;
 
     /**
      * Creates a new PostAddress object using the mutator methods inside the class
      * @param postTown - The town of the post
      * @param zipCode - zipCode for the post
-     * @param streetAddress - streetAddress for the post
+     * @param municipalityName - name of the Municipality for the post address
      */
-    public PostAddress(String postTown, String zipCode, String streetAddress) {
+    public PostAddress(String postTown, String zipCode, String municipalityName, String municipalityNumber, char category) {
         setPostTown(postTown);
         setZipCode(zipCode);
-        setStreetAddress(streetAddress);
+        setMunicipalityName(municipalityName);
+        setMunicipalityNumber(municipalityNumber);
+        setCategory(category);
     }
 
 
@@ -53,22 +57,38 @@ public class PostAddress {
     }
 
     /**
-     * Sets the Street Address of the post address
-     * @param streetAddress - new Street Address
+     * Sets the name of the Municipality of the post address
+     * @param municipalityName - new Street Address
      */
-    public void setStreetAddress(String streetAddress) {
+    public void setMunicipalityName(String municipalityName) {
         //Check for Null
-        Objects.requireNonNull(streetAddress, "Street Address cannot be Null");
-        //Check for empty address
-        if(streetAddress.equals("")){
+        Objects.requireNonNull(municipalityName, "Street Address cannot be Null");
+        //Check for empty name
+        if(municipalityName.equals("")){
             throw new IllegalArgumentException("Street Address cannot be empty");
         }
         //Valid Street Address, set Street Address
-        this.streetAddress = streetAddress;
+        this.municipalityName = municipalityName;
     }
 
+    public void setMunicipalityNumber(String municipalityNumber) {
+        //Check for null
+        Objects.requireNonNull(municipalityNumber, "Municipality Number cannot be Null");
+        //Check for empty number
+        if(municipalityNumber.equals("")){
+            throw new IllegalArgumentException("MunicipalityNumber cannot be empty");
+        }
+        this.municipalityNumber = municipalityNumber;
+    }
 
-    //Accessor methods
+    public void setCategory(char category) {
+        //Check for empty char
+        if(category == ' '){
+            throw new IllegalArgumentException("Category cannot be empty");
+        }
+        this.category = category;
+    }
+//Accessor methods
     /**
      * getZipCode is an accessor method for the zipCode field of the post address
      * @return post town of the post address
@@ -89,7 +109,30 @@ public class PostAddress {
      * getZipCode is an accessor method for the zipCode field of the post address
      * @return street address of the post address
      */
-    public String getStreetAddress() {
-        return streetAddress;
+    public String getMunicipalityName() {
+        return municipalityName;
+    }
+
+    public String getMunicipalityNumber() {
+        return municipalityNumber;
+    }
+
+    public char getCategory() {
+        return category;
+    }
+
+    /**
+     * toString returns information about the Post Address object
+     * @return Post Address in JSON format
+     */
+    @Override
+    public String toString() {
+        return "PostAddress{" +
+                "postTown='" + postTown + '\'' +
+                ", zipCode='" + zipCode + '\'' +
+                ", municipalityName='" + municipalityName + '\'' +
+                ", municipalityNumber='" + municipalityNumber + '\'' +
+                ", category=" + category +
+                '}';
     }
 }
