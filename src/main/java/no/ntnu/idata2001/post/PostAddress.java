@@ -1,4 +1,4 @@
-package no.ntnu.idata2001.Post;
+package no.ntnu.idata2001.post;
 
 import java.util.Objects;
 
