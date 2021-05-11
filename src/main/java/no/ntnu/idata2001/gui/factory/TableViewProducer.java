@@ -5,46 +5,39 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import no.ntnu.idata2001.post.PostAddress;
 
+import java.util.Iterator;
+import java.util.Map;
+
 public class TableViewProducer {
 
     public static TableView<PostAddress> create(String tableType){
         switch (tableType){
             case "PostAddress":
-                return createPostAddressTable();
+                PostAddress post = new PostAddress("pT", "zip", "mun", "munN", 'p');
+                return createPostAddressTable(post);
             default:
                 return null;
         }
     }
+
     /**
-     * Creates the tableView that can hold PostAddresses in the UI
-     * This TableView contains columns for all fields that the PostAddresses have
+     * createPostAddressTable creates a new table view based on the PostAddress class' "getDisplayFields" method
+     * This method returns a hashmap with fieldName and displayName of all fields that should be in the TableView
+     * @param post - PostAddress object
+     * @return TableView with all columns set for the PostAddress fields
      */
-    public static TableView<PostAddress> createPostAddressTable(){
-        //Setting columns for respective Patient Data
-        TableColumn<PostAddress, String> column1 = new TableColumn<>("Post Town");
-        column1.setCellValueFactory(new PropertyValueFactory<>("postTown"));
-        column1.setMinWidth(column1.getPrefWidth());
-
-        TableColumn<PostAddress, String> column2 = new TableColumn<>("Zip Code");
-        column2.setCellValueFactory(new PropertyValueFactory<>("zipCode"));
-        column2.setMinWidth(column2.getPrefWidth());
-
-        TableColumn<PostAddress, String> column3 = new TableColumn<>("Municipality");
-        column3.setCellValueFactory(new PropertyValueFactory<>("municipalityName"));
-        column3.setMinWidth(column3.getPrefWidth());
-
-        TableColumn<PostAddress, String> column4 = new TableColumn<>("Municipality Number");
-        column4.setCellValueFactory(new PropertyValueFactory<>("municipalityNumber"));
-        column4.setMinWidth(column4.getPrefWidth());
-
-        TableColumn<PostAddress, String> column5 = new TableColumn<>("Category");
-        column5.setCellValueFactory(new PropertyValueFactory<>("category"));
-        column5.setMinWidth(column5.getPrefWidth());
-
+    public static TableView<PostAddress> createPostAddressTable(PostAddress post){
         TableView<PostAddress> postView = new TableView<>();
-        //Add columns to tableView
-        postView.getColumns().addAll(column1, column2, column3, column4, column5);
 
+        //Create iterator to iterate over PostAddress Field List
+        Iterator it = post.getDisplayFields().entrySet().iterator();
+        while(it.hasNext()){
+            Map.Entry pair = (Map.Entry)it.next();
+
+            TableColumn<PostAddress, String> column = new TableColumn<>(pair.getValue().toString());
+            column.setCellValueFactory(new PropertyValueFactory<>(pair.getKey().toString()));
+            postView.getColumns().add(column);
+        }
         return postView;
     }
 }
