@@ -17,6 +17,7 @@ public class TableViewProducer {
     }
     /**
      * Creates the tableView that can hold PostAddresses in the UI
+     * This TableView contains columns for all fields that the PostAddresses have
      */
     public static TableView<PostAddress> createPostAddressTable(){
         //Setting columns for respective Patient Data
@@ -32,11 +33,17 @@ public class TableViewProducer {
         column3.setCellValueFactory(new PropertyValueFactory<>("municipalityName"));
         column3.setMinWidth(column3.getPrefWidth());
 
+        TableColumn<PostAddress, String> column4 = new TableColumn<>("Municipality Number");
+        column4.setCellValueFactory(new PropertyValueFactory<>("municipalityNumber"));
+        column4.setMinWidth(column4.getPrefWidth());
+
+        TableColumn<PostAddress, String> column5 = new TableColumn<>("Category");
+        column5.setCellValueFactory(new PropertyValueFactory<>("category"));
+        column5.setMinWidth(column5.getPrefWidth());
+
         TableView<PostAddress> postView = new TableView<>();
         //Add columns to tableView
-        postView.getColumns().add(column1);
-        postView.getColumns().add(column2);
-        postView.getColumns().add(column3);
+        postView.getColumns().addAll(column1, column2, column3, column4, column5);
 
         return postView;
     }
