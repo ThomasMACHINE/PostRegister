@@ -89,8 +89,9 @@ public class MenuProducer {
             BufferedReader reader = new BufferedReader(new FileReader(file.getAbsolutePath()));
             while ((line = reader.readLine()) != null) {
                 String[] data = line.split("\t");
-                PostAddress address = new PostAddress(data[0], data[1], data[2], data[3], data[4].charAt(0));
-                postView.getItems().add(address);
+                PostAddress address = new PostAddress(data[1], data[0], data[3], data[2], data[4].charAt(0));
+                TableViewProducer.postList.add(address);
+                //postView.getItems().add(address);
             }
         }catch (IOException e){
             ErrorDisplay.displayError(e.getLocalizedMessage());
