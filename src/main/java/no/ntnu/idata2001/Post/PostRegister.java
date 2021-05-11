@@ -8,12 +8,24 @@ public class PostRegister {
     private ArrayList<PostAddress> addresses; //ArrayList for holding all PostAddresses
 
     public PostRegister(String registerName) {
-        this.registerName = registerName;
+        setRegisterName(registerName);
         this.addresses = new ArrayList<>();
     }
 
     public String getRegisterName() {
         return registerName;
+    }
+
+    public void addPostAddress(PostAddress address){
+        Objects.requireNonNull(address, "Address cannot be null");
+
+        for(PostAddress existingAddress : addresses) {
+            if (existingAddress.equals(address)) {
+                throw new IllegalArgumentException("Address already exists");
+            }
+        }
+        //Valid address
+        addresses.add(address);
     }
 
     public void setRegisterName(String registerName) {
