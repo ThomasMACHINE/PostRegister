@@ -1,6 +1,7 @@
 package no.ntnu.idata2001.post;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 /**
  * Displayable interface is for all the classes of PostAddresses that will be displayed inside a TableView
@@ -8,6 +9,10 @@ import java.util.HashMap;
  * in the same function
  */
 public interface Displayable {
-
-    HashMap<String, String> getDisplayFields();
+    /**
+     * All PostAddress objects implements their own getDisplayFields method to tell the TableViewProducer
+     * which fields of the object should be displayed with which name
+     * @return
+     */
+    LinkedHashMap<String, String> getDisplayFields();
 }

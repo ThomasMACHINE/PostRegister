@@ -1,6 +1,7 @@
 package no.ntnu.idata2001.post;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Objects;
 
 public class PostAddress implements Displayable {
@@ -151,8 +152,8 @@ public class PostAddress implements Displayable {
     }
 
     @Override
-    public HashMap<String, String> getDisplayFields() {
-        HashMap<String, String> nameMap = new HashMap<>();
+    public LinkedHashMap<String, String> getDisplayFields() {
+        LinkedHashMap<String, String> nameMap = new LinkedHashMap<>();
         nameMap.put("postTown", "Post Town");
         nameMap.put("zipCode", "Zip Code");
         nameMap.put("municipalityName", "Municipality");
