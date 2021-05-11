@@ -1,20 +1,29 @@
 package no.ntnu.idata2001.gui.factory;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.geometry.Pos;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import no.ntnu.idata2001.post.PostAddress;
+import no.ntnu.idata2001.post.PostRegister;
 
 import java.util.Iterator;
 import java.util.Map;
 
 public class TableViewProducer {
+    public static ObservableList<PostAddress> postList = FXCollections.observableArrayList(new PostRegister("Post").getAddresses());
+    public static FilteredList<PostAddress> filteredList = new FilteredList<>(postList, p -> true);
 
     public static TableView<PostAddress> create(String tableType){
         switch (tableType){
             case "PostAddress":
                 PostAddress post = new PostAddress("pT", "zip", "mun", "munN", 'p');
                 return createPostAddressTable(post);
+            case "creative":
+                return CreateTableView();
             default:
                 return null;
         }
@@ -29,6 +38,8 @@ public class TableViewProducer {
     public static TableView<PostAddress> createPostAddressTable(PostAddress post){
         TableView<PostAddress> postView = new TableView<>();
 
+        postView.setItems(filteredList);
+
         //Create iterator to iterate over PostAddress Field List
         Iterator it = post.getDisplayFields().entrySet().iterator();
         while(it.hasNext()){
@@ -39,5 +50,13 @@ public class TableViewProducer {
             postView.getColumns().add(column);
         }
         return postView;
+    }
+    public static TableView CreateTableView(){
+        PostRegister a = new PostRegister("LOL");
+        a.addPostAddress(new PostAddress("P", "p", "p","p", 'p'));
+        var b  = new FilteredList<>(FXCollections.observableArrayList(a.getAddresses()));
+        TableView asd = new TableView(b);
+        asd.setItems(b);
+        return asd;
     }
 }
