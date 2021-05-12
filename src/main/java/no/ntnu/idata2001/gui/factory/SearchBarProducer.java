@@ -46,13 +46,15 @@ public class SearchBarProducer {
                     TableViewProducer.filteredList.setPredicate(p -> p.getPostTown().toLowerCase().contains(newValue.toLowerCase()));
                     return;
                 case "Zip Code":
-                    TableViewProducer.filteredList.setPredicate(p -> p.getZipCode().toLowerCase().contains(newValue.toLowerCase()));
+                    TableViewProducer.filteredList.setPredicate(p -> p.getZipCode().toLowerCase().startsWith(newValue.toLowerCase()));
+                            //.contains(newValue.toLowerCase()));
                     return;
                 case "Municipality":
                     TableViewProducer.filteredList.setPredicate(p -> p.getMunicipalityName().toLowerCase().contains(newValue.toLowerCase()));
                     return;
                 case "Municipality Number":
-                    TableViewProducer.filteredList.setPredicate(p -> p.getMunicipalityNumber().toLowerCase().contains(newValue.toLowerCase()));
+                    TableViewProducer.filteredList.setPredicate(p -> p.getMunicipalityNumber().toLowerCase().startsWith(newValue.toLowerCase()));
+                            //contains(newValue.toLowerCase()));
                     return;
                 case "Category":
                     //TableViewProducer.filteredList.setPredicate(p -> p.getCategory());
