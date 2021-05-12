@@ -66,7 +66,7 @@ public class PostAddressTest {
     void emptyChar(){
         boolean result = false;
         try{
-            PostAddress post = new PostAddress("null", "null", "null", "a", 'P');
+            PostAddress post = new PostAddress("null", "null", "null", "a", ' ');
             result = true;
         }catch (IllegalArgumentException ignored) {}
 
