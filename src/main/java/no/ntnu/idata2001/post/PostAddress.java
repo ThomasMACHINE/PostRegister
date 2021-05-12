@@ -157,7 +157,7 @@ public class PostAddress implements Displayable {
         nameMap.put("postTown", "Post Town");
         nameMap.put("zipCode", "Zip Code");
         nameMap.put("municipalityName", "Municipality");
-        nameMap.put("municipalityNumber", "Municipality Number");
+        nameMap.put("municipalityNumber", "Mun. Code");
         nameMap.put("category", "Category");
         return nameMap;
     }
