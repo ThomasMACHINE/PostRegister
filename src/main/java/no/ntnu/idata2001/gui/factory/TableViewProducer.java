@@ -7,23 +7,22 @@ import javafx.geometry.Pos;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import no.ntnu.idata2001.gui.MainStage;
 import no.ntnu.idata2001.post.PostAddress;
 import no.ntnu.idata2001.post.PostRegister;
 
 import java.util.Iterator;
 import java.util.Map;
 
+
 public class TableViewProducer {
-    public static ObservableList<PostAddress> postList = FXCollections.observableArrayList(new PostRegister("Post").getAddresses());
-    public static FilteredList<PostAddress> filteredList = new FilteredList<>(postList, p -> true);
 
     public static TableView<PostAddress> create(String tableType){
         switch (tableType){
             case "PostAddress":
                 PostAddress post = new PostAddress("pT", "zip", "mun", "munN", 'p');
                 return createPostAddressTable(post);
-            case "creative":
-                return CreateTableView();
+
             default:
                 return null;
         }
@@ -38,17 +37,17 @@ public class TableViewProducer {
     public static TableView<PostAddress> createPostAddressTable(PostAddress post){
         TableView<PostAddress> postView = new TableView<>();
 
-        postView.setItems(filteredList);
+        postView.setItems(MainStage.getFilteredList());
 
         //Create iterator to iterate over PostAddress Field List
         Iterator it = post.getDisplayFields().entrySet().iterator();
         while(it.hasNext()){
             Map.Entry pair = (Map.Entry)it.next();
-
             TableColumn<PostAddress, String> column = new TableColumn<>(pair.getValue().toString());
             column.setCellValueFactory(new PropertyValueFactory<>(pair.getKey().toString()));
             postView.getColumns().add(column);
         }
+        postView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         return postView;
     }
     public static TableView CreateTableView(){

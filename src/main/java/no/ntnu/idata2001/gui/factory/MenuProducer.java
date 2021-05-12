@@ -3,13 +3,13 @@ package no.ntnu.idata2001.gui.factory;
 import javafx.scene.control.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import no.ntnu.idata2001.gui.MainStage;
 import no.ntnu.idata2001.post.PostAddress;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Files;
 
 public class MenuProducer {
 
@@ -90,7 +90,7 @@ public class MenuProducer {
             while ((line = reader.readLine()) != null) {
                 String[] data = line.split("\t");
                 PostAddress address = new PostAddress(data[1], data[0], data[3], data[2], data[4].charAt(0));
-                TableViewProducer.postList.add(address);
+                MainStage.getPostList().add(address);
                 //postView.getItems().add(address);
             }
         }catch (IOException e){
