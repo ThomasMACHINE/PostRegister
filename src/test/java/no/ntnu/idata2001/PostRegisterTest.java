@@ -84,7 +84,19 @@ public class PostRegisterTest {
         assert(register.getRegisterName().equals("Spain"));
     }
     //================ NEGATIVE TESTING ===============================
-
+    /**
+     * Checks that adding an identical Post will not get added to the register
+     */
+    @Test
+    void addIdenticalPost(){
+        register.addPostAddress(post);
+        var result = false;
+        try {
+            register.addPostAddress(identicalPost);
+            result = true;
+        } catch (IllegalArgumentException ignored){}
+        assertFalse(result);
+    }
     /**
      * Checks if deleting Null post is handled by throwing an exception
      */
