@@ -151,8 +151,8 @@ public class PostAddress implements Displayable {
         return Objects.hash(postTown, zipCode, municipalityName, municipalityNumber, category);
     }
 
-    @Override
-    public LinkedHashMap<String, String> getDisplayFields() {
+
+    public static LinkedHashMap<String, String> getDisplayFields() {
         LinkedHashMap<String, String> nameMap = new LinkedHashMap<>();
         nameMap.put("postTown", "Post Town");
         nameMap.put("zipCode", "Zip Code");

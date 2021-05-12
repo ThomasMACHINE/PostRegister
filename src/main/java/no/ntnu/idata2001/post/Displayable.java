@@ -9,10 +9,5 @@ import java.util.LinkedHashMap;
  * in the same function
  */
 public interface Displayable {
-    /**
-     * All PostAddress objects implements their own getDisplayFields method to tell the TableViewProducer
-     * which fields of the object should be displayed with which name
-     * @return
-     */
-    LinkedHashMap<String, String> getDisplayFields();
+
 }
