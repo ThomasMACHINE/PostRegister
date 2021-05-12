@@ -39,7 +39,38 @@ public class PostRegister {
         this.registerName = registerName;
     }
 
+    public PostAddress getAddress(String zip){
+        for(PostAddress address : addresses){
+            if(address.getZipCode().equals(zip)){
+                return address;
+            }
+        }
+        return null;
+    }
     public ArrayList<PostAddress> getAddresses() {
         return addresses;
+    }
+
+    /**
+     * Delete by Zip as it is unique for every countrys post-addresses
+     * @param zip
+     */
+    public void deleteAddressByZip(String zip){
+        PostAddress post = getAddress(zip);
+
+        if(post == null){
+            return;
+        }
+        else{
+            addresses.remove(post);
+        }
+    }
+    public void deleteAddress(PostAddress post){
+        if(post == null){
+            throw new NullPointerException();
+        }
+        else {
+            addresses.remove(post);
+        }
     }
 }
