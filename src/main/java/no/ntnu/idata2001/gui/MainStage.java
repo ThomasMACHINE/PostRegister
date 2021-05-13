@@ -15,7 +15,8 @@ import no.ntnu.idata2001.post.PostAddress;
 import no.ntnu.idata2001.post.PostRegister;
 
 public class MainStage {
-    private static ObservableList<PostAddress> postList = FXCollections.observableArrayList(new PostRegister("Post").getAddresses());
+    private static PostRegister postRegister = new PostRegister("Norway");
+    private static ObservableList<PostAddress> postList = FXCollections.observableArrayList(postRegister.getAddresses());
     private static FilteredList<PostAddress> filteredList = new FilteredList<>(postList, p -> true);
 
     public static Scene createMainStage(){
@@ -30,5 +31,13 @@ public class MainStage {
     }
     public static FilteredList<PostAddress> getFilteredList(){
         return filteredList;
+    }
+
+    public static PostRegister getPostRegister() {
+        return postRegister;
+    }
+
+    public static void setPostList(ObservableList<PostAddress> postList) {
+        MainStage.postList = postList;
     }
 }
