@@ -51,7 +51,8 @@ public class SearchBarProducer {
         //Add Listener to update the table when new filter values are written
         textField.textProperty().addListener((obs, oldValue, newValue) -> {
             if(choiceBox.getValue() == null){
-                return;
+                textField.setText("<--- Please apply filter");
+                return; //Do nothing if a filter is not applied
             }
             switch (choiceBox.getValue()) {
                 case "Post Town":
