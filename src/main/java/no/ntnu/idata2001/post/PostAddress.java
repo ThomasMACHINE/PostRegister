@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Objects;
 
+/**
+ * PostAddress class is the class that creates all the post addresses along with its methods
+ */
 public class PostAddress implements Displayable {
     private String postTown;
     private String zipCode;
@@ -73,6 +76,10 @@ public class PostAddress implements Displayable {
         this.municipalityName = municipalityName;
     }
 
+    /**
+     * Set the municipality number
+     * @param municipalityNumber - new number
+     */
     public void setMunicipalityNumber(String municipalityNumber) {
         //Check for null
         Objects.requireNonNull(municipalityNumber, "Municipality Number cannot be Null");
@@ -83,6 +90,10 @@ public class PostAddress implements Displayable {
         this.municipalityNumber = municipalityNumber;
     }
 
+    /**
+     * Set the category
+     * @param category - new category
+     */
     public void setCategory(char category) {
         //Check for empty char
         if(category == ' '){
@@ -138,6 +149,11 @@ public class PostAddress implements Displayable {
                 '}';
     }
 
+    /**
+     * Checks if two objects are equal by checking if all fields are equal
+     * @param o - Post Address object
+     * @return - true if Addresses are equal
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -146,12 +162,10 @@ public class PostAddress implements Displayable {
         return category == that.category && Objects.equals(postTown, that.postTown) && Objects.equals(zipCode, that.zipCode) && Objects.equals(municipalityName, that.municipalityName) && Objects.equals(municipalityNumber, that.municipalityNumber);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(postTown, zipCode, municipalityName, municipalityNumber, category);
-    }
-
-
+    /**
+     * Class method for providing the fields that should be displayed within the Table
+     * @return an ordered map with fieldValue : DisplayName relation
+     */
     public static LinkedHashMap<String, String> getDisplayFields() {
         LinkedHashMap<String, String> nameMap = new LinkedHashMap<>();
         nameMap.put("postTown", "Post Town");

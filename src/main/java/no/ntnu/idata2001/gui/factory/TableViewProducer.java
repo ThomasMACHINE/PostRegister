@@ -1,9 +1,7 @@
 package no.ntnu.idata2001.gui.factory;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-import javafx.geometry.Pos;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -14,7 +12,9 @@ import no.ntnu.idata2001.post.PostRegister;
 import java.util.Iterator;
 import java.util.Map;
 
-
+/**
+ * TableView Producer creates tables for displaying data
+ */
 public class TableViewProducer {
 
     public static TableView<PostAddress> create(String tableType){
@@ -49,13 +49,5 @@ public class TableViewProducer {
         }
         postView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         return postView;
-    }
-    public static TableView CreateTableView(){
-        PostRegister a = new PostRegister("LOL");
-        a.addPostAddress(new PostAddress("P", "p", "p","p", 'p'));
-        var b  = new FilteredList<>(FXCollections.observableArrayList(a.getAddresses()));
-        TableView asd = new TableView(b);
-        asd.setItems(b);
-        return asd;
     }
 }

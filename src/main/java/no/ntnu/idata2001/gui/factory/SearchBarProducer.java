@@ -3,13 +3,13 @@ package no.ntnu.idata2001.gui.factory;
 import javafx.collections.transformation.FilteredList;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
-import no.ntnu.idata2001.gui.MainStage;
 import no.ntnu.idata2001.post.PostAddress;
-
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+/**
+ * SearchBarProducer is a producer class for producing SearchBar for tables
+ */
 public class SearchBarProducer {
     /**
      * Produces a search bar, type dictates which searchBar is produced

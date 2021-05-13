@@ -12,6 +12,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
+/**
+ * MenuProducer is a factory class for producing different Menus
+ */
 public class MenuProducer {
 
     /**
@@ -62,11 +65,8 @@ public class MenuProducer {
                 ErrorDisplay.displayError(ioException.getLocalizedMessage());
             }
         });
-
-        MenuItem exitApp = new MenuItem("Exit");
+        //Add to menuFile
         menuFile.getItems().addAll(openFile, advancedOpenFile);
-        menuFile.getItems().add(new SeparatorMenuItem());
-        menuFile.getItems().add(exitApp);
         //EditMenu
 
         //HelpMenu
@@ -75,9 +75,9 @@ public class MenuProducer {
         about.setOnAction(e -> doShowInfo());
         //Add to help
         menuView.getItems().addAll(about);
-
+        //Add all menuFiles to the MenuBar
         menuBar.getMenus().addAll(menuFile, menuView);
-
+        //Return MenuBar
         return menuBar;
     }
     /**
@@ -172,10 +172,8 @@ public class MenuProducer {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("About");
         alert.setHeaderText("An awesome creation, created by me, T H O M A S");
-        alert.setContentText("Please read README for more info: https://github.com/ThomasMACHINE/PostRegister");
+        alert.setContentText("README: https://github.com/ThomasMACHINE/PostRegister");
         alert.showAndWait();
     }
-    
-    
 }
 

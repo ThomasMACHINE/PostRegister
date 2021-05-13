@@ -3,19 +3,34 @@ package no.ntnu.idata2001.post;
 import java.util.ArrayList;
 import java.util.Objects;
 
+/**
+ * PostRegister is the class that holds PostAddresses
+ */
 public class PostRegister {
     private String registerName; //Register name
     private ArrayList<PostAddress> addresses; //ArrayList for holding all PostAddresses
 
+    /**
+     * Constructor, creates a new PostRegister object
+     * @param registerName - the name of the register
+     */
     public PostRegister(String registerName) {
         setRegisterName(registerName);
         this.addresses = new ArrayList<>();
     }
 
+    /**
+     * Accessor method for register name
+     * @return register name
+     */
     public String getRegisterName() {
         return registerName;
     }
 
+    /**
+     * Adds postAddress to the list if it is not equal to any of the other addresses in the list
+     * @param address - address to be added
+     */
     public void addPostAddress(PostAddress address){
         Objects.requireNonNull(address, "Address cannot be null");
 
@@ -28,6 +43,10 @@ public class PostRegister {
         addresses.add(address);
     }
 
+    /**
+     * Mutator method, changes register name
+     * @param registerName - new register name
+     */
     public void setRegisterName(String registerName) {
         //Check not null
         Objects.requireNonNull(registerName, "Register Name cannot be null");
@@ -39,7 +58,12 @@ public class PostRegister {
         this.registerName = registerName;
     }
 
-    public PostAddress getAddress(String zip){
+    /**
+     * Find address by zip
+     * @param zip - zip code of the post address to be found
+     * @return - postAddress if found
+     */
+    public PostAddress getAddressByZip(String zip){
         for(PostAddress address : addresses){
             if(address.getZipCode().equals(zip)){
                 return address;
@@ -52,11 +76,11 @@ public class PostRegister {
     }
 
     /**
-     * Delete by Zip as it is unique for every countrys post-addresses
-     * @param zip
+     * Mutator method, delete by Zip as it is unique for every countrys post-addresses
+     * @param zip - zip code of the address
      */
     public void deleteAddressByZip(String zip){
-        PostAddress post = getAddress(zip);
+        PostAddress post = getAddressByZip(zip);
 
         if(post == null){
             return;
@@ -65,6 +89,11 @@ public class PostRegister {
             addresses.remove(post);
         }
     }
+
+    /**
+     * Mutator method, deletes a post from the list
+     * @param post - post to be deleted
+     */
     public void deleteAddress(PostAddress post){
         if(post == null){
             throw new NullPointerException();

@@ -9,8 +9,9 @@ import no.ntnu.idata2001.datastructs.FileInfo;
 
 import java.util.Optional;
 
-import static java.lang.Integer.parseInt;
-
+/**
+ * InputDisplayProducer creates different Pop Ups for retrieving inputs when needed
+ */
 public class InputDisplayProducer {
     /**
      * Creates a dialog that prompts for input on file structure, it then creates a FileInfo object based on inputs
@@ -60,10 +61,10 @@ public class InputDisplayProducer {
         ButtonType okButton = new ButtonType("Confirm Input", ButtonBar.ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().add(okButton);
 
+        //Set method for converting results into FileInfo object
         dialog.setResultConverter(new Callback<ButtonType, FileInfo>() {
             @Override
             public FileInfo call(ButtonType buttonType) {
-
                 if(buttonType == okButton){
                     try{
                         //Convert ChoiceBox value to boolean

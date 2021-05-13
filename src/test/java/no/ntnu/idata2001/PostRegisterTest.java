@@ -72,7 +72,7 @@ public class PostRegisterTest {
     void checkZipSearch(){
         register.addPostAddress(post);
         String zip = post.getZipCode();
-        PostAddress foundPost = register.getAddress(zip);
+        PostAddress foundPost = register.getAddressByZip(zip);
         assertNotNull(foundPost);
     }
     /**
