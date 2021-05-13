@@ -1,9 +1,7 @@
 package no.ntnu.idata2001.gui.factory;
 
 import javafx.collections.transformation.FilteredList;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import no.ntnu.idata2001.gui.MainStage;
 import no.ntnu.idata2001.post.PostAddress;
@@ -13,7 +11,12 @@ import java.util.Iterator;
 import java.util.Map;
 
 public class SearchBarProducer {
-
+    /**
+     * Produces a search bar, type dictates which searchBar is produced
+     * @param searchBarType - The type of search bar
+     * @param filteredList - The list that the search bar should search on
+     * @return Hbox with a search bar
+     */
     public static HBox create(String searchBarType, FilteredList<PostAddress> filteredList){
 
         switch (searchBarType){
@@ -24,6 +27,11 @@ public class SearchBarProducer {
         }
     }
 
+    /**
+     * Creates a search bar for filtering the post addresses by their fields
+     * @param filteredList - the list that is in the table view
+     * @return
+     */
     private static HBox createSearchBar(FilteredList<PostAddress> filteredList) {
 
         ChoiceBox<String> choiceBox = new ChoiceBox<>();
@@ -35,11 +43,16 @@ public class SearchBarProducer {
             Map.Entry pair = (Map.Entry)it.next();
             choiceBox.getItems().add(pair.getValue().toString());
         }
-        choiceBox.setValue("Filter by");
+
 
         TextField textField = new TextField();
-        textField.setPromptText("Search Field");
+        textField.setPromptText("<-- Apply a filter and filter in here!");
+        textField.setMinWidth(250);
+        //Add Listener to update the table when new filter values are written
         textField.textProperty().addListener((obs, oldValue, newValue) -> {
+            if(choiceBox.getValue() == null){
+                return;
+            }
             switch (choiceBox.getValue()) {
                 case "Post Town":
                     filteredList.setPredicate(p -> p.getPostTown().toLowerCase().contains(newValue.toLowerCase()));
@@ -62,8 +75,9 @@ public class SearchBarProducer {
                     return;
             }
         });
-        //choiceBox.getSelectionModel().selectedItemProperty().addListener((obs, oldValue, newValue));
-
+        //Set text field to "" if filter method is changed
+        choiceBox.setOnAction(e -> textField.setText(""));
+        //Add to HBox and return
         HBox hBox = new HBox(choiceBox, textField);
         return hBox;
     }
